@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News & Blogs - Event Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #f8f8f8; }
+
+        /* Navigation bar styles */
+        .navbar {
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            height: 70px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Brush Script MT', cursive;
+            margin-right: 40px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            flex: 1;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 0;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            color: #ffb400;
+        }
+        .navbar .call-btn {
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 25px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #ffb40055;
+            font-weight: bold;
+        }
+        .navbar .call-btn:hover {
+            background: linear-gradient(90deg, #ff6600 0%, #ffb400 100%);
+            box-shadow: 0 4px 16px #ffb40099;
+        }
+
+        /* Hero section */
+        .hero {
+            width: 100%;
+            height: 60vh;
+            background: url('../images/Background.jpg') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 40px 20px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .hero-content .divider {
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            margin: 30px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* News/Blog Section */
+        .news-section {
+            background: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .news-section h2 {
+            color: #ff6600;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .blog-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .blog-card {
+            background: #f8f8f8;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px #00000011;
+            padding: 0 0 24px 0;
+            width: 320px;
+            text-align: left;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            box-shadow: 0 8px 32px #ffb40033;
+            transform: translateY(-8px) scale(1.03);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .blog-card .blog-content {
+            padding: 20px 20px 0 20px;
+            flex: 1;
+        }
+        .blog-card h3 {
+            color: #ff6600;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .blog-card p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+        .blog-card .blog-meta {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .blog-card a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .blog-card a:hover {
+            color: #ffb400;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #060606;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 20px 0;
+            position: relative;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 0;
+        }
+        .footer-content p {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .footer-content h2 {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #ffb400;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 900px) {
+            .blog-list {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .blog-card {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar ul li {
+                margin: 8px 0;
+            }
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation bar with logo and menu links -->
+    <nav class="navbar">
+        <div class="logo">Event<span style="color:#ffb400;">Planner</span></div>
+        <ul>
+            <li><a href="Index.html">HOME</a></li>
+            <li><a href="services.html">SERVICES</a></li>
+            <li><a href="MissionVision.html">MISSION & VISION</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="FAQs.html">FAQs</a></li>
+            <li><a href="testimonalsreviews.html">TESTIMONIALS</a></li>
+            <li><a href="news.html" class="active">NEWS/BLOG</a></li>
+            <li><a href="Contactus.html">CONTACT US</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+        </ul>
+        <button class="call-btn">BOOK NOW</button>
+    </nav>
+    <!-- Hero section with main headline and background image -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Latest News & Blogs</h2>
+            <div class="divider"></div>
+        </div>
+    </section>
+    <!-- News/Blog Section -->
+    <section class="news-section">
+        <h2>News & Blogs</h2>
+        <div class="blog-list">
+        <div class="blog-card">
+            <img src="../images/plan1.jpg" alt="Blog 1">
+            <div class="blog-content">
+                <div class="blog-meta"><i class="fas fa-calendar-alt"></i> May 10, 2025 | <i class="fas fa-user"></i> Fionalyn Quito</div>
+                <h3>5 Tips for Planning the Perfect Event</h3>
+                <p>Discover our top tips to make your next event seamless, memorable, and stress-free for everyone involved.</p>
+                <a href="Readmore.html">Read More &raquo;</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <img src="../images/trendy theme.jpg" alt="Blog 2">
+            <div class="blog-content">
+                <div class="blog-meta"><i class="fas fa-calendar-alt"></i> April 22, 2025 | <i class="fas fa-user"></i> Alex Rivera</div>
+                <h3>Trendy Themes for 2025 Celebrations</h3>
+                <p>Explore the hottest event themes for 2025, from elegant weddings to fun birthday parties and corporate gatherings.</p>
+                <a href="trendy.html">Read More &raquo;</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <img src="../images/behindscene.jpg" alt="Blog 3">
+            <div class="blog-content">
+                <div class="blog-meta"><i class="fas fa-calendar-alt"></i> March 15, 2025 | <i class="fas fa-user"></i> Jamie Cruz</div>
+                <h3>Behind the Scenes: How We Plan Events</h3>
+                <p>Take a look at our process and see how our team brings your vision to life, from concept to celebration.</p>
+                <a href="behindscene.html">Read More &raquo;</a>
+            </div>
+        </div>
+    </div>
+    </section>
+    <!-- Footer: Copyright and designer credit -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Event Planner. All rights reserved.</p>
+            <h2>DESIGNED BY: FIONALYN QUITO</h2>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Event Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset and base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #f8f8f8; }
+
+        /* Navigation bar styles */
+        .navbar {
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            height: 70px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Brush Script MT', cursive;
+            margin-right: 40px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            flex: 1;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 0;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            color: #ffb400;
+        }
+        .navbar .call-btn {
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 25px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #ffb40055;
+            font-weight: bold;
+        }
+        .navbar .call-btn:hover {
+            background: linear-gradient(90deg, #ff6600 0%, #ffb400 100%);
+            box-shadow: 0 4px 16px #ffb40099;
+        }
+
+        /* Hero section */
+        .hero {
+            width: 100%;
+            height: 60vh;
+            background: url('../images/Background.jpg') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 40px 20px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .hero-content .divider {
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            margin: 30px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: #fff;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+        }
+        .profile-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f8f8f8;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px #ffb40022;
+            padding: 40px 30px 30px 30px;
+            position: relative;
+        }
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ffb400;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px #ffb40044;
+        }
+        .profile-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .profile-role {
+            color: #ffb400;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
+            font-family: 'Brush Script MT', cursive;
+        }
+        .profile-info {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+        .profile-details {
+            text-align: left;
+            margin: 0 auto 18px auto;
+            max-width: 350px;
+        }
+        .profile-details li {
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 1rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .profile-details li i {
+            color: #ffb400;
+            margin-right: 10px;
+            width: 22px;
+            text-align: center;
+        }
+        .profile-social {
+            margin-top: 18px;
+        }
+        .profile-social a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #ff6600;
+            font-size: 1.6rem;
+            transition: color 0.2s;
+        }
+        .profile-social a:hover {
+            color: #ffb400;
+        }
+        .profile-quote {
+            margin-top: 28px;
+            font-style: italic;
+            color: #888;
+            font-size: 1.05rem;
+            border-left: 4px solid #ffb400;
+            padding-left: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #060606;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 20px 0;
+            position: relative;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 0;
+        }
+        .footer-content p {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .footer-content h2 {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #ffb400;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar ul li {
+                margin: 8px 0;
+            }
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            .profile-card {
+                padding: 18px 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation bar with logo and menu links -->
+    <nav class="navbar">
+        <div class="logo">Event<span style="color:#ffb400;">Planner</span></div>
+        <ul>
+            <li><a href="Index.html">HOME</a></li>
+            <li><a href="services.html">SERVICES</a></li>
+            <li><a href="MissionVision.html">MISSION & VISION</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="FAQs.html">FAQs</a></li>
+            <li><a href="testimonalsreviews.html">TESTIMONIALS</a></li>
+            <li><a href="news.html">NEWS/BLOG</a></li>
+            <li><a href="Contactus.html">CONTACT US</a></li>
+            <li><a href="profile.html" class="active">PROFILE</a></li>
+        </ul>
+        <button class="call-btn">CALL NOW</button>
+    </nav>
+    <!-- Hero section with main headline and background image -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Designer Profile</h2>
+            <div class="divider"></div>
+        </div>
+    </section>
+    <!-- Profile Section -->
+    <section class="profile-section" style="padding-top: 10px;">
+    <div class="profile-cards-container" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;">
+        <!-- Personal Info Card -->
+        <div class="profile-card">
+            <img src="../images/pyopyp.jpg" alt="Fionalyn Quito" class="profile-avatar">
+            <div class="profile-name">Fionalyn Quito</div>
+            <div class="profile-role">Web Designer & Event Planner</div>
+            <div class="profile-info">
+                Passionate about crafting beautiful events and digital experiences.<br>
+                Dedicated to making every celebration unique and memorable.
+            </div>
+            <ul class="profile-details">
+                <li><i class="fas fa-birthday-cake"></i> Birthday: August 20, 2006</li>
+                <li><i class="fas fa-map-marker-alt"></i> Location: Angeles city, Philippines</li>
+                <li><i class="fas fa-envelope"></i> Email: fionalynquito@email.com</li>
+                <li><i class="fas fa-phone"></i> Phone: +63 947 799 9288</li>
+                <li><i class="fas fa-graduation-cap"></i> Education: BSIT, CCST Dau Mabalacat</li>
+            </ul>
+            <div class="profile-social">
+                <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="profile-quote">
+                "Design is not just what it looks like and feels like. Design is how it works." <br>– Steve Jobs
+            </div>
+        </div>
+        <!-- Hobbies & Future Card -->
+        <div class="profile-card">
+            <img src="../images/pyopyp.jpg" alt="Fionalyn Quito" class="profile-avatar">
+            <div class="profile-name">Fionalyn Quito</div>
+            <div class="profile-role">Web Designer & Event Planner</div>
+            <div class="profile-info">
+                Exploring creativity beyond events and web design.<br>
+                Here are my hobbies and dreams for the future!
+            </div>
+            <ul class="profile-details">
+                <li><i class="fas fa-paint-brush"></i> Hobby: Painting & Drawing</li>
+                <li><i class="fas fa-music"></i> Hobby: Listening to Music</li>
+                <li><i class="fas fa-book"></i> Hobby: Reading Inspirational Books</li>
+                <li><i class="fas fa-camera"></i> Hobby: Photography</li>
+                <li><i class="fas fa-hiking"></i> Hobby: Nature Walks & Travel</li>
+            </ul>
+            <div class="profile-future" style="margin-top:24px; text-align:left; max-width:350px; margin-left:auto; margin-right:auto;">
+                <h3 style="color:#ff6600; font-size:1.2rem; margin-bottom:10px;">
+                    <i class="fas fa-bullseye" style="color:#ffb400;"></i> My Future Goals
+                </h3>
+                <ul style="padding-left:18px; color:#444; font-size:1rem;">
+                    <li>Become a wealthy and live to a one of the countries in Europe</li>
+                    <li>Travel the world and experience different cultures</li>
+                    <li>Build my own creative agency</li>
+                    <li>Inspire others through design and innovation</li>
+                </ul>
+            </div>
+            <div class="profile-social">
+                <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="profile-quote">
+                "The future belongs to those who believe in the beauty of their dreams." <br>– Eleanor Roosevelt
+            </div>
+        </div>
+    </div>
+    </section>
+        
+    </section>
+    <!-- Footer: Copyright and designer credit -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Event Planner. All rights reserved.</p>
+            <h2>DESIGNED BY: FIONALYN QUITO</h2>
+        </div>
+    </footer>
+</body>
+</html>
