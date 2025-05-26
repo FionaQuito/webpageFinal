@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weddings & Engagements - Event Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #f8f8f8; }
+
+        /* Navigation bar styles */
+        .navbar {
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            height: 70px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Brush Script MT', cursive;
+            margin-right: 40px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            flex: 1;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 0;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            color: #ffb400;
+        }
+        .navbar .call-btn {
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 25px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #ffb40055;
+            font-weight: bold;
+        }
+        .navbar .call-btn:hover {
+            background: linear-gradient(90deg, #ff6600 0%, #ffb400 100%);
+            box-shadow: 0 4px 16px #ffb40099;
+        }
+
+        /* Hero section */
+        .hero {
+            width: 100%;
+            height: 60vh;
+            background: url('../images/logo.PNG') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 40px 20px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .hero-content .divider {
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            margin: 30px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Wedding Section */
+        .wedding-section {
+            background: #fff;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+        }
+        .wedding-section h2 {
+            color: #ff6600;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .wedding-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .wedding-info {
+            flex: 1 1 350px;
+            background: #f8f8f8;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px #ffb40022;
+            padding: 32px 24px 24px 24px;
+            text-align: left;
+        }
+        .wedding-info h3 {
+            color: #ffb400;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .wedding-info ul {
+            color: #444;
+            font-size: 1rem;
+            margin: 0 0 10px 18px;
+            padding: 0;
+        }
+        .wedding-info ul li {
+            margin-bottom: 8px;
+        }
+        .wedding-gallery {
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+        .wedding-gallery img {
+            width: 260px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #ffb40033;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #060606;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 20px 0;
+            position: relative;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 0;
+        }
+        .footer-content p {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .footer-content h2 {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #ffb400;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 900px) {
+            .wedding-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .wedding-info, .wedding-gallery {
+                width: 100%;
+                margin: 0 auto;
+            }
+            .wedding-gallery img {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar ul li {
+                margin: 8px 0;
+            }
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation bar with logo and menu links -->
+    <nav class="navbar">
+        <div class="logo">Event<span style="color:#ffb400;">Planner</span></div>
+        <ul>
+            <li><a href="Index.html">HOME</a></li>
+            <li><a href="services.html">SERVICES</a></li>
+            <li><a href="MissionVision.html">MISSION & VISION</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="FAQs.html">FAQs</a></li>
+            <li><a href="testimonalsreviews.html">TESTIMONIALS</a></li>
+            <li><a href="news.html">NEWS/BLOG</a></li>
+            <li><a href="Contactus.html">CONTACT US</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+        </ul>
+        <button class="call-btn">BOOK NOW</button>
+    </nav>
+    <!-- Hero section with main headline and background image -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Weddings & Engagements</h2>
+            <div class="divider"></div>
+        </div>
+    </section>
+    <!-- Wedding Section -->
+    <section class="wedding-section">
+        <h2>Celebrate Your Love Story in Style!</h2>
+        <div class="wedding-content">
+            <div class="wedding-info">
+                <h3>Our Wedding & Engagement Services Include:</h3>
+                <ul>
+                    <li><i class="fas fa-gem" style="color:#ffb400;"></i> Venue styling & floral arrangements</li>
+                    <li><i class="fas fa-music" style="color:#ffb400;"></i> Ceremony & reception coordination</li>
+                    <li><i class="fas fa-utensils" style="color:#ffb400;"></i> Catering & menu planning</li>
+                    <li><i class="fas fa-car" style="color:#ffb400;"></i> Bridal car & entourage</li>
+                    <li><i class="fas fa-microphone" style="color:#ffb400;"></i> Program hosting & entertainment</li>
+                    <li><i class="fas fa-camera" style="color:#ffb400;"></i> Photo & video coverage</li>
+                </ul>
+                <p style="margin-top:18px;">
+                    Let us turn your dream wedding into reality! <br>
+                    <a href="Contactus.html" style="color:#ff6600;font-weight:bold;">Start planning today &raquo;</a>
+                </p>
+            </div>
+            <div class="wedding-gallery">
+                <img src="../images/wedding1.jpg" alt="Wedding 1">
+                <img src="../images/wedding2.jpg" alt="Wedding 2">
+                <img src="../images/wedding3.jpg" alt="Wedding 3">
+            </div>
+        </div>
+    </section>
+    <!-- Footer: Copyright and designer credit -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Event Planner. All rights reserved.</p>
+            <h2>DESIGNED BY: FIONALYN QUITO</h2>
+        </div>
+    </footer>
+</body>
+</html>

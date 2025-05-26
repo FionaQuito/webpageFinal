@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimonials & Reviews - Event Planner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #f8f8f8; }
+
+        /* Navigation bar styles */
+        .navbar {
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            height: 70px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .navbar .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Brush Script MT', cursive;
+            margin-right: 40px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            flex: 1;
+        }
+        .navbar ul li {
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 0;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            color: #ffb400;
+        }
+        .navbar .call-btn {
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 25px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #ffb40055;
+            font-weight: bold;
+        }
+        .navbar .call-btn:hover {
+            background: linear-gradient(90deg, #ff6600 0%, #ffb400 100%);
+            box-shadow: 0 4px 16px #ffb40099;
+        }
+
+        /* Hero section */
+        .hero {
+            width: 100%;
+            height: 40vh;
+            background: url('../images/Background.jpg') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .hero-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #00000055;
+        }
+        .hero-content .divider {
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffb400 0%, #ff6600 100%);
+            margin: 30px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: #fff;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+        }
+        .testimonials-section h2 {
+            color: #ff6600;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .testimonials-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .testimonial-card {
+            background: #f8f8f8;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px #00000011;
+            padding: 32px 24px 24px 24px;
+            width: 320px;
+            text-align: left;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .testimonial-card:hover {
+            box-shadow: 0 8px 32px #ffb40033;
+            transform: translateY(-8px) scale(1.03);
+        }
+        .testimonial-card .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            border: 3px solid #ffb400;
+        }
+        .testimonial-card .name {
+            color: #ff6600;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        .testimonial-card .date {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        .testimonial-card .review {
+            color: #444;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .testimonial-card .stars {
+            color: #ffb400;
+            margin-bottom: 8px;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #060606;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 20px 0;
+            position: relative;
+            width: 100%;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 0;
+        }
+        .footer-content p {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        .footer-content h2 {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #ffb400;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 900px) {
+            .testimonials-list {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .testimonial-card {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 700px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar ul li {
+                margin: 8px 0;
+            }
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation bar with logo and menu links -->
+    <nav class="navbar">
+        <div class="logo">Event<span style="color:#ffb400;">Planner</span></div>
+        <ul>
+            <li><a href="Index.html">HOME</a></li>
+            <li><a href="services.html">SERVICES</a></li>
+            <li><a href="MissionVision.html">MISSION & VISION</a></li>
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="FAQs.html">FAQs</a></li>
+            <li><a href="testimonalsreviews.html" class="active">TESTIMONIALS</a></li>
+            <li><a href="news.html">NEWS/BLOG</a></li>
+            <li><a href="Contactus.html">CONTACT US</a></li>
+            <li><a href="profile.html">PROFILE</a></li>
+        </ul>
+        <button class="call-btn">BOOK NOW</button>
+    </nav>
+    <!-- Hero section with main headline and background image -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>What Our Clients Say</h2>
+            <div class="divider"></div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2>Testimonials & Reviews</h2>
+        <div class="testimonials-list">
+            <div class="testimonial-card">
+                <img src="../images/face1.jpg" alt="Client 1" class="avatar">
+                <div class="name">Maria Santos</div>
+                <div class="date">May 2025</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review">
+                    "The team made my daughter's birthday magical! Everything was perfect and stress-free. Highly recommended!"
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <img src="../images/face2.jpg" alt="Client 2" class="avatar">
+                <div class="name">John Dela Cruz</div>
+                <div class="date">April 2025</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="review">
+                    "Our corporate event was a huge success thanks to your professionalism and creativity. Will book again!"
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <img src="../images/face3.jpg" alt="Client 3" class="avatar">
+                <div class="name">Alyssa Mendoza</div>
+                <div class="date">March 2025</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review">
+                    "From planning to execution, everything was smooth. Our wedding was truly unforgettable. Thank you!"
+                </div>
+            </div>
+             <div class="testimonial-card">
+                <img src="../images/face4.jpg" alt="Client 3" class="avatar">
+                <div class="name">Nikki Masajje</div>
+                <div class="date">March 2025</div>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="review">
+                    "From planning to execution, everything was smooth. Our wedding was truly unforgettable. Thank you!"
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer: Copyright and designer credit -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Event Planner. All rights reserved.</p>
+            <h2>DESIGNED BY: FIONALYN QUITO</h2>
+        </div>
+    </footer>
+</body>
+</html>
